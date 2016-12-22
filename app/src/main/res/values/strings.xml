@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">FD/RD Calculator</string>
+    <string name="action_exit">Exit</string>
+    <string name="shareApp">\nApp Download link - https://play.google.com/store/apps/details?id=com.legendfarmer.android.rdfdcalculator</string>
+    <string name="lakh">Lakh</string>
+    <string name="shareVia">Share Via</string>
+    <string name="infinity">Infinity</string>
+    <string name="crore">Crore</string>
+    <string name="million">Million</string>
+    <string name="billion">Billion</string>
+    <string name="trillion">Trillion</string>
+    <string name="monthlyDep">Monthly Deposit</string>
+    <string name="totDep">Total Deposit</string>
+    <string name="rateApp">Rate us</string>
+    <string name="shareRes">Share Result</string>
+    <string name="textplain">text/plain</string>
+    <string name="fixed">Fixed</string>
+    <string name="rd">Recurring</string>
+    <string name="roi">Rate of Interest (%)</string>
+    <string name="monthly">Monthly</string>
+    <string name="halfyear">Half-Yearly</string>
+    <string name="quarter">Quarterly</string>
+    <string name="year">Yearly</string>
+    <string name="cfreq">Compounding Frequency</string>
+    <string name="reset">Reset</string>
+    <string name="maturity">Maturity Amount</string>
+    <string name="interest">Interest Amount</string>
+    <string name="time">Time Period</string>
+    <string name="yy">Year</string>
+    <string name="mm">Month</string>
+    <string name="typeOfInvestment">Type of Investment</string>
+    <string name="deposit">Deposit</string>
+    <string name="redirectToast">Rate our app! Redirecting to Google Play Store.</string>
+</resources>

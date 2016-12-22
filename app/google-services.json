@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "204495474267",
+    "project_id": "firebase-fdcalculator"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204495474267:android:1add69792cc22631",
+        "android_client_info": {
+          "package_name": "com.legendfarmer.android.rdfdcalculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCil_Hex_fq3Zt4LA4fyIm0IddRqnzYOsc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-89120669-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

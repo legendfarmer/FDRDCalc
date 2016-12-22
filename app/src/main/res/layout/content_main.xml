@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.legendfarmer.android.rdfdcalculator.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:id="@+id/contentMain">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/choiceLayout"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/typLayout">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/calcType"
+                android:checkedButton="@+id/fd"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
+
+                <RadioButton
+                    android:text="@string/fixed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fd"
+                    android:layout_weight="0.31"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:buttonTint="@android:color/holo_red_light"
+                    android:elevation="24dp"
+                    android:textStyle="normal|bold"
+                      />
+
+                <RadioButton
+                    android:text="@string/rd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rd"
+                    android:layout_weight="0.25"
+                    android:buttonTint="@android:color/holo_red_light"
+                    android:textStyle="normal|bold"
+                     />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/resetLayout"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"
+            android:layout_gravity="right">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:text="@string/reset"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/reset"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_red_light"
+                    android:textColor="@android:color/white"
+                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputLayout"
+        android:layout_below="@+id/choiceLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:layout_width="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:id="@+id/principal"
+                android:hint="@string/totDep"
+                android:textSize="14dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:id="@+id/roi"
+                android:maxLength="5"
+                android:hint="@string/roi"
+                android:textSize="14dp"></EditText>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <TextView
+                    android:text="@string/time"
+                    android:layout_height="match_parent"
+                    android:id="@+id/timeLabel"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:layout_weight="0.33"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="normal|bold"
+                    android:textSize="13dp" />
+
+                <EditText
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:id="@+id/tYY"
+                    android:layout_weight="0.33"
+                    android:maxLength="2"
+                    android:hint="@string/yy"
+                    android:textSize="14dp"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content" />
+
+                <EditText
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:id="@+id/tMM"
+                    android:hint="@string/mm"
+                    android:maxLength="2"
+                    android:layout_weight="0.33"
+                    android:textSize="14dp"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:gravity="right">
+
+            <TextView
+                android:text="@string/cfreq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelCF"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="13dp"
+                android:textStyle="normal|bold"
+                android:gravity="center_horizontal|center"
+                android:layout_gravity="center_horizontal" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/frequency"
+                android:checkedButton="@+id/yearly"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <RadioButton
+                    android:text="@string/year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yearly"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/holo_red_light"
+                    android:textSize="14dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textAlignment="center" />
+
+                <RadioButton
+                    android:text="@string/halfyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/halfYearly"
+                    android:buttonTint="@android:color/holo_red_light"
+                    android:layout_weight="1"
+                    android:textSize="14dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textAlignment="center" />
+
+                <RadioButton
+                    android:text="@string/quarter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quarterly"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/holo_red_light"
+                    android:textSize="14dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textAlignment="center" />
+
+                <RadioButton
+                    android:text="@string/monthly"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/monthly"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/holo_red_light"
+                    android:textSize="14dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textAlignment="center" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="1"
+        android:id="@+id/resultLayout"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:weightSum="1">
+
+            <TextView
+                android:text="@string/maturity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/amountLable"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:text="0.0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/amount"
+                android:layout_weight="0.25"
+                android:textAlignment="center"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/interest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/intLabel"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:text="0.0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/interest"
+                android:layout_weight="0.64"
+                android:textAlignment="center"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
