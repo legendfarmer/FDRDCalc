@@ -15,19 +15,22 @@
 
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
         android:layout_height="wrap_content"
-        android:id="@+id/choiceLayout"
-        android:weightSum="1">
+        android:id="@+id/allInputDiv"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_border"
+        >
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
             android:layout_height="match_parent"
-            android:id="@+id/typLayout">
+            android:id="@+id/choiceLayout"
+            android:weightSum="1">
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -39,11 +42,11 @@
                 android:gravity="center_horizontal">
 
                 <RadioButton
-                    android:text="@string/fixed"
+                    android:text="@string/fdFull"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/fd"
-                    android:layout_weight="0.31"
+                    android:layout_weight="0.5"
                     android:backgroundTint="@android:color/holo_red_light"
                     android:buttonTint="@android:color/holo_red_light"
                     android:elevation="24dp"
@@ -51,230 +54,309 @@
                       />
 
                 <RadioButton
-                    android:text="@string/rd"
+                    android:text="@string/rdFull"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/rd"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.5"
                     android:buttonTint="@android:color/holo_red_light"
                     android:textStyle="normal|bold"
-                     />
+                    android:layout_marginLeft="10dp" />
 
             </RadioGroup>
+
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1"
             android:layout_height="match_parent"
-            android:id="@+id/resetLayout"
-            android:layout_marginLeft="10dp"
-            android:gravity="right"
-            android:layout_gravity="right">
+            android:id="@+id/inputLayout"
+            android:layout_below="@+id/choiceLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp">
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/inputLine1"
                 android:layout_weight="1">
 
-                <Button
-                    android:text="@string/reset"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/reset"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/holo_red_light"
-                    android:textColor="@android:color/white"
-                    android:layout_height="25dp"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:id="@+id/totDepInputDIV"
+                    android:layout_marginRight="3dp">
+
+                    <TextView
+                        android:text="@string/totDep"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/principalLabel"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:textStyle="normal|bold" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="numberDecimal"
+                        android:id="@+id/principal"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:hint="@string/example2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/roiInputDiv">
+
+                    <TextView
+                        android:text="@string/roi"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/roiLabel"
+                        android:layout_weight="0.55"
+                        android:gravity="center_vertical"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:textAlignment="viewStart"
+                        android:textStyle="normal|bold" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="numberDecimal"
+                        android:id="@+id/roi"
+                        android:maxLength="5"
+                        android:textSize="14dp"
+                        android:layout_weight="0.38"
+                        android:hint="@string/example1"></EditText>
+
+                    <TextView
+                        android:text="%"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/percentLabel"
+                        android:layout_weight="0.1"
+                        android:textSize="13sp"
+                        android:textColor="#000000" />
+
+                </LinearLayout>
+
             </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:weightSum="1"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputLayout"
-        android:layout_below="@+id/choiceLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:weightSum="1"
-            android:layout_width="wrap_content">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:id="@+id/principal"
-                android:hint="@string/totDep"
-                android:textSize="14dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:id="@+id/roi"
-                android:maxLength="5"
-                android:hint="@string/roi"
-                android:textSize="14dp"></EditText>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="1">
+                android:weightSum="1"
+                android:id="@+id/inputLine2"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp">
 
-                <TextView
-                    android:text="@string/time"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_height="match_parent"
-                    android:id="@+id/timeLabel"
-                    android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:layout_weight="0.33"
-                    android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="normal|bold"
-                    android:textSize="13dp" />
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:id="@+id/freqDiv"
+                    android:layout_marginRight="3dp"
+                    android:gravity="center_vertical|start">
 
-                <EditText
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:id="@+id/tYY"
-                    android:layout_weight="0.33"
-                    android:maxLength="2"
-                    android:hint="@string/yy"
-                    android:textSize="14dp"
-                    android:textAlignment="center"
-                    android:layout_width="wrap_content" />
+                    <TextView
+                        android:text="@string/cfreq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/freqlabelCF"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="13sp"
+                        android:textStyle="normal|bold"
+                        android:gravity="center_vertical|center_horizontal|center" />
 
-                <EditText
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:id="@+id/tMM"
-                    android:hint="@string/mm"
-                    android:maxLength="2"
-                    android:layout_weight="0.33"
-                    android:textSize="14dp"
-                    android:textAlignment="center"
-                    android:layout_width="wrap_content" />
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/compFreqSpinner"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal|center"
+                        android:prompt="@string/cfreq"
+                        />
+                       <!-- android:entries="@array/compoundingFreq"-->
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tenureInpDiv">
+
+                    <TextView
+                        android:text="@string/time"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/timeLabel"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:layout_weight="2.32"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:textSize="13dp"
+                        android:textStyle="normal|bold" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.32">
+
+                        <EditText
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:id="@+id/tYY"
+                            android:layout_weight="1"
+                            android:maxLength="2"
+                            android:textSize="14dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_width="0dp"
+                            android:hint="5" />
+
+
+                        <TextView
+                            android:text="@string/yy"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView"
+                            android:layout_weight="1"
+                            android:textColor="?android:attr/textColorPrimary" />
+
+                        <EditText
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:id="@+id/tMM"
+                            android:maxLength="2"
+                            android:textSize="14dp"
+
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:hint="6" />
+
+                        <TextView
+                            android:text="@string/mm"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView2"
+                            android:layout_weight="1"
+                            android:textColor="?android:attr/textColorPrimary" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:paddingLeft="10dp"
-            android:gravity="right">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_vertical|center_horizontal|center"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/otherLinksDiv">
 
-            <TextView
-                android:text="@string/cfreq"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/labelCF"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="13dp"
-                android:textStyle="normal|bold"
-                android:gravity="center_horizontal|center"
-                android:layout_gravity="center_horizontal" />
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/frequency"
-                android:checkedButton="@+id/yearly"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/button_about"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="Tell Us"
+            android:drawableTop="@drawable/ic_action_about_48"
+            android:layout_weight="1">
+        </Button>
 
-                <RadioButton
-                    android:text="@string/year"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/yearly"
-                    android:layout_weight="1"
-                    android:buttonTint="@android:color/holo_red_light"
-                    android:textSize="14dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textAlignment="center" />
+        <Button
+            android:id="@+id/button_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="Rate us"
+            android:drawableTop="@drawable/ic_action_christmas_star_48"
+            android:layout_weight="1">
+        </Button>
 
-                <RadioButton
-                    android:text="@string/halfyear"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/halfYearly"
-                    android:buttonTint="@android:color/holo_red_light"
-                    android:layout_weight="1"
-                    android:textSize="14dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textAlignment="center" />
+        <Button
+            android:id="@+id/button_share"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="Share"
+            android:drawableTop="@drawable/ic_action_share_48_2"
+            android:layout_weight="1">
+        </Button>
 
-                <RadioButton
-                    android:text="@string/quarter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/quarterly"
-                    android:layout_weight="1"
-                    android:buttonTint="@android:color/holo_red_light"
-                    android:textSize="14dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textAlignment="center" />
+        <Button
+            android:id="@+id/button_more"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="More"
+            android:drawableTop="@drawable/ic_action_more_48"
+            android:layout_weight="1">
+        </Button>
 
-                <RadioButton
-                    android:text="@string/monthly"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/monthly"
-                    android:layout_weight="1"
-                    android:buttonTint="@android:color/holo_red_light"
-                    android:textSize="14dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textAlignment="center" />
-            </RadioGroup>
-
-        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:weightSum="1"
         android:id="@+id/resultLayout"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inputLayout"
+        android:background="@drawable/custom_border"
+        android:layout_below="@+id/allInputDiv"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+
+        android:layout_marginBottom="0dp">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:weightSum="1">
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/maturityAmtDiv">
 
             <TextView
                 android:text="@string/maturity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/amountLable"
-                android:textAlignment="center"
-                android:textSize="18dp"
-                android:textStyle="normal|bold" />
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:textAlignment="center" />
 
             <TextView
                 android:text="0.0"
@@ -283,13 +365,18 @@
                 android:id="@+id/amount"
                 android:layout_weight="0.25"
                 android:textAlignment="center"
-                android:textSize="18dp" />
+                android:textSize="18sp"
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/intAmountDiv"
+            android:layout_weight="1">
 
             <TextView
                 android:text="@string/interest"
@@ -297,6 +384,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/intLabel"
                 android:textAlignment="center"
+                android:layout_weight="1"
                 android:textSize="18dp"
                 android:textStyle="normal|bold" />
 
@@ -305,9 +393,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/interest"
-                android:layout_weight="0.64"
+                android:layout_weight="1"
                 android:textAlignment="center"
-                android:textSize="18dp" />
+                android:textSize="18sp"
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

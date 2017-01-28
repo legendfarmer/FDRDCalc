@@ -32,7 +32,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
@@ -114,7 +114,7 @@
                                         android:inputType="number"
                                         android:id="@+id/tYY"
                                         android:imeOptions="flagNoExtractUi"
-                                        android:layout_weight="1"
+                                        android:layout_weight="0.54"
                                         android:maxLength="2"
                                         android:hint="@string/yy"
                                         android:textSize="14dp"
@@ -143,46 +143,40 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right">
+                        android:layout_marginLeft="20dp">
 
-                        <LinearLayout
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:id="@+id/calcType"
+                            android:checkedButton="@+id/fd"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal">
 
-                            <RadioGroup
+                            <RadioButton
+                                android:text="@string/fixed"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:id="@+id/calcType"
-                                android:checkedButton="@+id/fd"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center_horizontal">
+                                android:layout_height="wrap_content"
+                                android:id="@+id/fd"
+                                android:layout_weight="0.31"
+                                android:backgroundTint="@android:color/holo_red_light"
+                                android:buttonTint="@android:color/holo_red_light"
+                                android:elevation="24dp"
+                                android:textStyle="normal|bold"
+                                app:buttonTint="@android:color/holo_red_light" />
 
-                                <RadioButton
-                                    android:text="@string/fixed"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/fd"
-                                    android:layout_weight="0.31"
-                                    android:backgroundTint="@android:color/holo_red_light"
-                                    android:buttonTint="@android:color/holo_red_light"
-                                    android:elevation="24dp"
-                                    android:textStyle="normal|bold"
-                                    app:buttonTint="@android:color/holo_red_light" />
+                            <RadioButton
+                                android:text="@string/rd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rd"
+                                android:layout_weight="0.25"
+                                android:buttonTint="@android:color/holo_red_light"
+                                android:textStyle="normal|bold"
+                                app:buttonTint="@android:color/holo_red_light" />
 
-                                <RadioButton
-                                    android:text="@string/rd"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/rd"
-                                    android:layout_weight="0.25"
-                                    android:buttonTint="@android:color/holo_red_light"
-                                    android:textStyle="normal|bold"
-                                    app:buttonTint="@android:color/holo_red_light" />
-
-                            </RadioGroup>
-                        </LinearLayout>
+                        </RadioGroup>
 
                     </LinearLayout>
 
@@ -286,17 +280,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/resetLayout">
 
-                        <Button
-                            android:text="@string/reset"
-                            android:layout_alignParentRight="true"
-                            android:id="@+id/reset"
-                            android:layout_weight="1"
-                            android:background="@android:color/holo_red_light"
-                            android:textColor="@android:color/white"
-                            android:layout_height="25dp"
-                            android:layout_width="wrap_content"
-                            android:gravity="center"
-                            android:layout_gravity="center" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -335,7 +318,8 @@
                     android:id="@+id/amount"
                     android:layout_weight="0.25"
                     android:textAlignment="center"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:textColor="@android:color/holo_green_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -361,9 +345,66 @@
                     android:id="@+id/interest"
                     android:layout_weight="0.64"
                     android:textAlignment="center"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:textColor="@android:color/holo_green_dark" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_vertical|center_horizontal|center"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
+
+        <Button
+            android:id="@+id/button_about"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="Tell Us"
+            android:drawableTop="@drawable/ic_action_about_48"
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/button_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="Rate us"
+            android:drawableTop="@drawable/ic_action_christmas_star_48"
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/button_share"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="Share"
+            android:drawableTop="@drawable/ic_action_share_48_2"
+            android:layout_weight="1">
+        </Button>
+
+        <Button
+            android:id="@+id/button_more"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:text="More"
+            android:drawableTop="@drawable/ic_action_more_48"
+            android:layout_weight="1">
+        </Button>
+
+
+    </LinearLayout>
 </RelativeLayout>

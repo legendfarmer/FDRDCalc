@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -31,16 +32,29 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.legendfarmer.android.rdfdcalculator.util.InputFilterMinMax;
 
+import java.util.ArrayList;
+
+import static com.legendfarmer.android.rdfdcalculator.R.id.amount;
+import static com.legendfarmer.android.rdfdcalculator.R.string.deposit;
+
 public class MainActivity extends AppCompatActivity
 {
-    private RadioGroup frequency, calcType;
+    private RadioGroup calcType;
     private EditText principalTxt, rateOfInterestTxt, tYY, tMM;
-    private TextView amountTxt, interest;
-    private Button reset;
+    private TextView amountTxt, interest, princLabel;
     private ShareActionProvider mShareActionProvider;
     private String PACKAGE_NAME;
     private Tracker mTracker;
     private static final String TAG = "MainActivity";
+
+    private Spinner compFreq ;
+    private Button rateUs;
+    private Button shareApp;
+    private Button moreFromUs;
+    private Button feedback;
+
+    private int invTyp;
+    private String selFreq;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -52,8 +66,6 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Obtain the shared Tracker instance.
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
 
@@ -73,29 +85,91 @@ public class MainActivity extends AppCompatActivity
     {
         rateOfInterestTxt = (EditText) findViewById(R.id.roi);
         principalTxt = (EditText) findViewById(R.id.principal);
+        princLabel = (TextView) findViewById(R.id.principalLabel);
         tYY = (EditText) findViewById(R.id.tYY);
         tMM = (EditText) findViewById(R.id.tMM);
-        amountTxt = (TextView) findViewById(R.id.amount);
+        amountTxt = (TextView) findViewById(amount);
         interest = (TextView) findViewById(R.id.interest);
-        frequency = (RadioGroup) findViewById(R.id.frequency);
         calcType = (RadioGroup) findViewById(R.id.calcType);
-        reset = (Button) findViewById(R.id.reset);
-
+        rateUs = (Button) findViewById(R.id.button_rate);
+        moreFromUs = (Button) findViewById(R.id.button_more);
+        shareApp = (Button) findViewById(R.id.button_share);
+        feedback = (Button) findViewById(R.id.button_about);
+        compFreq = (Spinner) findViewById(R.id.compFreqSpinner);
         //Input field Validations (limit values in a range)
+        selFreq = getString(R.string.year);
         tMM.setFilters(new InputFilter[]{new InputFilterMinMax(0, 11), new InputFilter.LengthFilter(2)});
         tYY.setFilters(new InputFilter[]{new InputFilterMinMax(0, 99), new InputFilter.LengthFilter(2)});
         principalTxt.setFilters(new InputFilter[]{new InputFilterMinMax(0, 999999999)});
 
-        //Assign methods to events
-        reset.setOnClickListener(new View.OnClickListener() {
+        ArrayList<String> cfList = new ArrayList<>();
+        cfList.add(getString(R.string.year));
+        cfList.add(getString(R.string.halfyear));
+        cfList.add(getString(R.string.quarter));
+        cfList.add(getString(R.string.monthly));
+
+        ArrayAdapter<String> adapterFull = new ArrayAdapter<String>(this, R.layout.spinner_item,cfList);
+        compFreq.setAdapter(adapterFull);
+
+        calcType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
+                validateDoCalculation();
+                hideKeyPad();
+            }
+        });
+
+        compFreq.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+
+                selFreq = compFreq.getSelectedItem().toString();
+                validateDoCalculation();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        setOnChangeListenerForET(principalTxt, tMM, tYY, rateOfInterestTxt);
+
+        rateUs.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
-                resetAllFields(principalTxt, rateOfInterestTxt, tYY, tMM);
+                rateApp();
             }
         });
-        setOnchangeListenerForRG(frequency, calcType);
-        setOnChangeListenerForET(principalTxt, tMM, tYY, rateOfInterestTxt);
+
+        moreFromUs.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                moreFromUs();
+            }
+        });
+
+        shareApp.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                setShareIntent();
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                feedback();
+            }
+        });
     }
 
     public void setOnChangeListenerForET(EditText... args) {
@@ -105,17 +179,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void setOnchangeListenerForRG(RadioGroup... args) {
-        for (RadioGroup rg : args) {
-            rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                    validateDoCalculation();
-                    hideKeyPad();
-                }
-            });
-        }
-    }
 
     public void etTxtChangeListener(EditText et) {
         et.addTextChangedListener(new TextWatcher() {
@@ -138,54 +201,59 @@ public class MainActivity extends AppCompatActivity
 
     public void validateDoCalculation()
     {
-        int selFreq = frequency.getCheckedRadioButtonId(), selType = calcType.getCheckedRadioButtonId(), typ = 0;
+        float amount = 0f, deposit = 0f, intAmount = 0f;
+        Double p =0d, t = 0d, r = 0d;
+        Double days = 0d;
         Double n = 1d;
-
-        switch (selFreq)
-        {
-            case R.id.halfYearly:
-                n = 2d;break;
-            case R.id.yearly:
-                n = 1d; break;
-            case R.id.quarterly:
-                n = 4d;  break;
-            case R.id.monthly:
-                n = 12d;break;
-        }
-
-        switch (selType)
+        invTyp = 1;
+        int selectedId = calcType.getCheckedRadioButtonId();
+        switch (selectedId)
         {
             case R.id.rd:
-                typ = 0;
-                principalTxt.setHint(getString(R.string.monthlyDep));
+                invTyp = 0;
+                princLabel.setText(getString(R.string.monthlyDep));
                 break;
             case R.id.fd:
-                principalTxt.setHint(getString(R.string.totDep));
-                typ = 1;
+                princLabel.setText(getString(R.string.totDep));
+                invTyp = 1;
                 break;
         }
 
-
-        Double p = Double.parseDouble(getNumETAsString(principalTxt));
-        Double t = Double.parseDouble(getNumETAsString(tYY)) + Double.parseDouble(getNumETAsString(tMM)) / 12d;
-        Double r = 0d;
-        try
-        {
-            r = Double.parseDouble(getNumETAsString(rateOfInterestTxt));
+        if(selFreq.equals(getString(R.string.halfyear))) {
+            n = 2d;
         }
-        catch (Exception ex)
+        else if(selFreq.equals(getString(R.string.monthly)))
         {
-            r = 0d;
+            n = 12d;
         }
-        r = r / 100d;
-
-        float amount = 0f, deposit = 0f, intAmount = 0f;
-        deposit = typ == 0 ? p.floatValue() * t.floatValue() * 12 : p.floatValue();
-        amount = deposit;
+        else if(selFreq.equals(getString(R.string.year)))
+        {
+            n = 1d;
+        }
+        else if(selFreq.equals(getString(R.string.quarter)))
+        {
+            n = 4d;
+        }
 
         if (!isAnyElementEmpty())
         {
-            amount = fdCalc(p, t, r, n, typ);
+            try
+            {
+                p = Double.parseDouble(getNumETAsString(principalTxt));
+                t = Double.parseDouble(getNumETAsString(tYY)) + (Double.parseDouble(getNumETAsString(tMM)) / 12d) ;
+                r = Double.parseDouble(getNumETAsString(rateOfInterestTxt));
+            }
+            catch (Exception ex)
+            {
+                p = 0d;
+                t =0d;
+                r = 0d;
+            }
+            r = r / 100d;
+
+            deposit = invTyp == 0 ? p.floatValue() * t.floatValue() * 12f : p.floatValue();
+            amount = deposit;
+            amount = fdCalc(p, t, r, n, invTyp);
             intAmount = amount == 0 ? 0 : amount - deposit;
         }
 
@@ -202,10 +270,10 @@ public class MainActivity extends AppCompatActivity
                 .build());
     }
 
-    float fdCalc(Double p, Double t, Double r, Double n, int typ)
+    float fdCalc(Double p, Double t, Double r, Double n, int invTyp)
     {
         float res = 0f;
-        switch (typ)
+        switch (invTyp)
         {
             case 0:                         //RD
                 res = findRd(p, t, r, n);
@@ -213,21 +281,20 @@ public class MainActivity extends AppCompatActivity
             case 1:                        //FD
                 res = findFd(p, t, r, n);
                 break;
+            case 2:                        //FD
+                res = findSimple(p, t, r, n);
+                break;
         }
         return res;
     }
 
     public float findRd(Double p, double t, double r, double n)
     {
-        trackEvent(getString(R.string.rd));
-
-        Double monthsAftIntCred = 12d / n;
         Double timePeriod = t * 12d;
         Float res = 0f;
-        double nTimes = t * n;
         while (timePeriod > 0)
         {
-            res = res + findFd(p, timePeriod / 12d, r, n);
+            res = res + findFd(p, timePeriod/12d, r, n);
             timePeriod--;
         }
         return res;
@@ -235,9 +302,18 @@ public class MainActivity extends AppCompatActivity
 
     public float findFd(Double p, double t, double r, double n)
     {
-        trackEvent(getString(R.string.fixed));
-
+        if(p==0||t==0||r==0)
+        {
+            return 0;
+        }
         Double amount = p * Math.pow((1d + (r / n)), n * t);
+        return amount.floatValue();
+    }
+
+    public float findSimple(Double p, double t, double r, double n)
+    {
+        trackEvent(getString(R.string.fixed));
+        Double amount = (p * t * r )/100;
         return amount.floatValue();
     }
 
@@ -246,8 +322,7 @@ public class MainActivity extends AppCompatActivity
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.findItem(R.id.menu_item_share);
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
         return true;
     }
 
@@ -262,16 +337,13 @@ public class MainActivity extends AppCompatActivity
             System.exit(0);
             return true;
         }
-        else if (id == R.id.menu_item_share)
+
+        else if(id==R.id.action_refresh)
         {
-            trackEvent(getString(R.string.shareRes));
-            setShareIntent();
+            resetAllFields(principalTxt, rateOfInterestTxt, tYY, tMM);
+            compFreq.setSelection(0);
         }
-        else if (id == R.id.rate_us)
-        {
-            Toast.makeText(getApplicationContext(),getString(R.string.redirectToast),Toast.LENGTH_SHORT).show();
-            rateUs();
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -310,14 +382,14 @@ public class MainActivity extends AppCompatActivity
             e.setText("");
         }
 
-        frequency.check(R.id.yearly);
+
         calcType.check(R.id.fd);
         principalTxt.requestFocus(0);
     }
 
     public boolean isAnyElementEmpty()
     {
-        return isETEmpty(principalTxt) || isETEmpty(rateOfInterestTxt) || (isETEmpty(tYY) && isETEmpty(tMM));
+        return isETEmpty(principalTxt) || isETEmpty(rateOfInterestTxt) || ((isETEmpty(tYY) && isETEmpty(tMM)));
     }
 
     // Call to update the share intent
@@ -329,7 +401,7 @@ public class MainActivity extends AppCompatActivity
         StringBuilder buildContent = new StringBuilder();//
         buildContent.append(getString(R.string.app_name)).append("\n\n");
         buildContent.append(getString(R.string.typeOfInvestment)).append(" : ").append(getSelectedInvType()).append("\n");
-        buildContent.append(principalTxt.getHint()).append(" : ").append(getNumETAsString(principalTxt)).append("\n");
+        buildContent.append(princLabel.getText()).append(" : ").append(getNumETAsString(principalTxt)).append("\n");
         buildContent.append(getString(R.string.roi)).append(" : ").append(getNumETAsString(rateOfInterestTxt)).append("\n");
         buildContent.append(getString(R.string.time)).append(" : ").append(getNumETAsString(tYY) + " "+ getString(R.string.yy) + " ").append(getNumETAsString(tMM) + " " + getString(R.string.mm)).append("\n");
         buildContent.append(getString(R.string.cfreq)).append(" : ").append(getSelectedCompFreq()).append("\n\n\n");
@@ -427,13 +499,14 @@ public class MainActivity extends AppCompatActivity
 
     public String getSelectedInvType()
     {
-        int selFreq = calcType.getCheckedRadioButtonId();
-        switch (selFreq)
+        int calcTypeID = calcType.getCheckedRadioButtonId();
+        switch (calcTypeID)
         {
             case R.id.fd:
-                return getString(R.string.fixed) +  " " + getString(R.string.deposit);
+                return getString(R.string.fixed) +  " " + getString(deposit);
             case R.id.rd:
-                return getString(R.string.rd) + " " + getString(R.string.deposit);
+                return getString(R.string.rd) + " " + getString(deposit);
+
             default:
                 return "";
         }
@@ -441,19 +514,7 @@ public class MainActivity extends AppCompatActivity
 
     public String getSelectedCompFreq()
     {
-        int selFreq = frequency.getCheckedRadioButtonId();
-        switch (selFreq)
-        {
-            case R.id.halfYearly:
-                return getString(R.string.halfyear);
-            case R.id.yearly:
-                return getString(R.string.year);
-            case R.id.quarterly:
-                return getString(R.string.quarter);
-            case R.id.monthly:
-                return getString(R.string.monthly);
-        }
-        return "";
+        return compFreq.getSelectedItem().toString();
     }
 
     private void sendScreenImageName()
@@ -463,4 +524,42 @@ public class MainActivity extends AppCompatActivity
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
+    public void rateApp()
+    {
+        Uri uri = Uri.parse("market://details?id=" + PACKAGE_NAME);
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try
+        {
+            trackEvent("rateApp");
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e)
+        {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + PACKAGE_NAME)));
+        }
+    }
+
+    public void moreFromUs()
+    {
+        Uri uri = Uri.parse("market://search?q=pub:LegendFarmer");
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        trackEvent("moreFromUs");
+        try
+        {
+            startActivity(goToMarket);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/search?q=pub:LegendFarmer")));
+        }
+    }
+
+
+    public void feedback()
+    {
+        trackEvent("feedback");
+        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://docs.google.com/forms/d/12ESNaKVptNHSbUYbBOA-ucz3-jkc5bRqRY4Zsm7Gkfk/viewform")));
+    }
 }
