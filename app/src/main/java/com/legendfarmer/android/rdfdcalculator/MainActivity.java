@@ -30,6 +30,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.legendfarmer.android.rdfdcalculator.util.InputFilterForDecimalValues;
 import com.legendfarmer.android.rdfdcalculator.util.InputFilterMinMax;
 
 import java.util.ArrayList;
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         selFreq = getString(R.string.year);
         tMM.setFilters(new InputFilter[]{new InputFilterMinMax(0, 11), new InputFilter.LengthFilter(2)});
         tYY.setFilters(new InputFilter[]{new InputFilterMinMax(0, 99), new InputFilter.LengthFilter(2)});
+        rateOfInterestTxt.setFilters(new InputFilter[] { new InputFilterForDecimalValues(2,2) });
         principalTxt.setFilters(new InputFilter[]{new InputFilterMinMax(0, 999999999)});
 
         ArrayList<String> cfList = new ArrayList<>();

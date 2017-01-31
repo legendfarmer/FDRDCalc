@@ -21,8 +21,8 @@
     <string name="rdFull">Recurring Deposit</string>
     <string name="simple">Simple</string>
     <string name="roi">Interest Rate</string>
-    <string name="example1">Ex: 7.25</string>
-    <string name="example2"> Ex: 10000</string>
+    <string name="example1">7.25</string>
+    <string name="example2">10000</string>
     <string name="monthly">Monthly</string>
     <string name="halfyear">Half-Yearly</string>
     <string name="quarter">Quarterly</string>

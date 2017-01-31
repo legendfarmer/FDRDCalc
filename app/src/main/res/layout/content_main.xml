@@ -51,7 +51,7 @@
                     android:buttonTint="@android:color/holo_red_light"
                     android:elevation="24dp"
                     android:textStyle="normal|bold"
-                      />
+                    android:textSize="14dp" />
 
                 <RadioButton
                     android:text="@string/rdFull"
@@ -61,7 +61,8 @@
                     android:layout_weight="0.5"
                     android:buttonTint="@android:color/holo_red_light"
                     android:textStyle="normal|bold"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14dp" />
 
             </RadioGroup>
 
@@ -101,7 +102,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:textColor="#000000"
-                        android:textSize="13sp"
+                        android:textSize="13dp"
                         android:textStyle="normal|bold" />
 
                     <EditText
@@ -129,7 +130,7 @@
                         android:layout_weight="0.55"
                         android:gravity="center_vertical"
                         android:textColor="#000000"
-                        android:textSize="13sp"
+                        android:textSize="13dp"
                         android:textAlignment="viewStart"
                         android:textStyle="normal|bold" />
 
@@ -149,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/percentLabel"
                         android:layout_weight="0.1"
-                        android:textSize="13sp"
+                       android:textSize="13dp"
                         android:textColor="#000000" />
 
                 </LinearLayout>
@@ -180,19 +181,19 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/freqlabelCF"
                         android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="13sp"
+                       android:textSize="13dp"
                         android:textStyle="normal|bold"
                         android:gravity="center_vertical|center_horizontal|center" />
 
                     <Spinner
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/compFreqSpinner"
                         android:layout_weight="1"
                         android:gravity="center_vertical|center_horizontal|center"
                         android:prompt="@string/cfreq"
                         />
-                       <!-- android:entries="@array/compoundingFreq"-->
+                    <!-- android:entries="@array/compoundingFreq"-->
 
 
                 </LinearLayout>
@@ -239,7 +240,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView"
                             android:layout_weight="1"
-                            android:textColor="?android:attr/textColorPrimary" />
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14dp" />
 
                         <EditText
                             android:layout_height="match_parent"
@@ -259,7 +261,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView2"
                             android:layout_weight="1"
-                            android:textColor="?android:attr/textColorPrimary" />
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14dp" />
 
 
                     </LinearLayout>
@@ -354,7 +357,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/amountLable"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textStyle="normal|bold"
                 android:textAlignment="center" />
 
@@ -365,7 +368,7 @@
                 android:id="@+id/amount"
                 android:layout_weight="0.25"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="@android:color/holo_green_dark"
                 android:textStyle="normal|bold"
                 android:layout_marginTop="5dp" />
@@ -395,7 +398,7 @@
                 android:id="@+id/interest"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="@android:color/holo_green_dark"
                 android:textStyle="normal|bold"
                 android:layout_marginTop="5dp" />
